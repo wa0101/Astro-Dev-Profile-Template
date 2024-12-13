@@ -1,29 +1,42 @@
-# WA Dev Profile
+# Dev Profile Template
 
-A modern, interactive developer profile page built with Astro and TypeScript. Features a sleek design with real-time status indicators, achievement tracking, and contribution history.
+Hey! 👋 This is a template for building dev profile pages. Got inspired by Codeium and GitHub's profile pages - they look really clean so I thought it'd be cool to make a simple version that anyone can use as a starting point for their projects.
 
-## 🚀 Features
+## What's in it?
 
-- 💫 Modern, responsive design
-- 🎯 Achievement system with progress tracking
-- 📊 Interactive contribution graph
-- 🟢 Real-time status indicators
-- 👤 Customizable user profiles
-- 🎨 Beautiful UI with hover effects
+- Dark theme
+- Status indicator to show if someone's online
+- Achievement cards (super basic rn but works)
+- Activity graph (like GitHub's but simpler)
+- Some stats to show off
 
-## 🛠️ Tech Stack
+## Screenshots
 
-- [Astro](https://astro.build) - Static Site Generator
-- [TypeScript](https://www.typescriptlang.org/) - Type Safety
-- [Tailwind CSS](https://tailwindcss.com) - Styling
-- [React](https://reactjs.org) - UI Components
+Here's how it looks:
 
-## 🏃‍♂️ Getting Started
+![Profile Overview](Screenshots/screen1.png)
 
-1. Clone the repository:
+## Todo List
+
+Still needs work on:
+- Activity graph data (pretty random rn)
+- Achievement system (needs more stuff)
+- Mobile view
+- Probably more things
+
+## Tech Used
+
+- Astro (it's really nice for static sites)
+- TypeScript (because any: never)
+- Tailwind (makes CSS bearable)
+- React (for the interactive bits)
+
+## Want to use it?
+
+1. Clone it:
 ```bash
-git clone https://github.com/yourusername/wa-dev-profile.git
-cd wa-dev-profile
+git clone https://github.com/yourusername/dev-profile-template.git
+cd dev-profile-template
 ```
 
 2. Install dependencies:
@@ -31,52 +44,44 @@ cd wa-dev-profile
 npm install
 ```
 
-3. Start the development server:
+3. Run it:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Check it out at [http://localhost:3000](http://localhost:3000)
 
-## 📝 Configuration
+## Make it yours
 
-Edit `src/config/profile.ts` to customize your profile:
+Just edit `src/config/profile.ts`:
 
 ```typescript
 export const profileConfig = {
   user: {
     name: 'Your Name',
-    username: 'your-username',
-    bio: 'Your bio here',
-    // ... more options
-  },
-  // ... other configurations
+    bio: 'Whatever you want',
+    // there's more stuff here
+  }
 }
 ```
 
-## 🎨 Customization
-
-- **Status Types**: Online, Idle, Offline, DoNotDisturb
-- **Achievement System**: Easily add new achievements
-- **Color Schemes**: Customizable through Tailwind classes
-
-## 📦 Project Structure
+## Files and Stuff
 
 ```
 /
 ├── src/
-│   ├── components/    # UI Components
-│   ├── config/       # Profile configuration
-│   ├── layouts/      # Page layouts
-│   └── pages/        # Route pages
-├── public/           # Static assets
-└── package.json      # Dependencies
+│   ├── components/    # all the UI components
+│   ├── config/       # profile settings
+│   ├── layouts/      # page layouts
+│   └── pages/        # routes
+├── public/           # static files
+└── Screenshots/      # screenshots
 ```
 
-## 🤝 Contributing
+## Thanks
 
-Feel free to contribute! Open an issue or submit a pull request.
+Shoutout to Codeium and GitHub - their profile UIs were the main inspiration. This is just a basic template you can build on top of for your own projects.
 
-## 📄 License
+## Want to help?
 
-MIT License - feel free to use this for your own profile!
+Feel free to fix bugs or add cool stuff! Just remember this is a template, so keep it simple and easy to customize.

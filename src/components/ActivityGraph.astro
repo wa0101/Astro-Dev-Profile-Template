@@ -7,12 +7,13 @@ interface Props {
 
 const { activityData } = Astro.props;
 
+// M W F is enough for the graph
 const days = ['M', 'W', 'F'];
 
-// Calculate total contributions
+// count total contributions
 const totalContributions = activityData.reduce((sum, count) => sum + count, 0);
 
-// Generate dates for the last year
+// need this for the graph dates
 const today = new Date();
 const dates = Array.from({ length: 371 }, (_, i) => {
     const date = new Date(today);
@@ -20,10 +21,10 @@ const dates = Array.from({ length: 371 }, (_, i) => {
     return date;
 });
 
-// Get unique months for labels
+// grab month names for the bottom
 const months = Array.from(new Set(dates.map(date => format(date, 'MMM'))));
 
-// Format date for tooltip
+// tooltip date format
 function formatDate(date: Date): string {
     try {
         return format(date, 'MMMM d, yyyy');
