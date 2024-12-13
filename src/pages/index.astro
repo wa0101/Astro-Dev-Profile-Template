@@ -1,11 +1,18 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ProfileHeader from '../components/ProfileHeader.astro';
+import StatsSection from '../components/StatsSection.astro';
+import ActivityGraph from '../components/ActivityGraph.astro';
+import AchievementCards from '../components/AchievementCards.astro';
+import { profileConfig } from '../config/profile';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={`${profileConfig.user.name} Profile`}>
+	<main class="container mx-auto px-4 py-8 max-w-6xl">
+		<ProfileHeader user={profileConfig.user} />
+		<StatsSection stats={profileConfig.stats} />
+		<ActivityGraph activityData={profileConfig.activityData.contributions} />
+		<AchievementCards achievements={profileConfig.achievements} />
+	</main>
 </Layout>

@@ -1,0 +1,85 @@
+---
+interface Props {
+    stats: {
+        totalCompletions: number;
+        streak: {
+            current: number;
+            record: number;
+            lastUpdated: string;
+        };
+        totalLanguages: number;
+        contributions: {
+            total: number;
+            lastYear: number;
+            thisMonth: number;
+        };
+    };
+}
+
+const { stats } = Astro.props;
+
+function formatNumber(num: number): string {
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'k';
+    }
+    return num.toString();
+}
+---
+
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="bg-card-bg hover:bg-card-hover transition-colors duration-200 rounded-lg p-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-accent-primary/10 p-2 rounded-lg">
+                <svg class="w-5 h-5 text-accent-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12l5 5l10-10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-text-secondary">Total Completions</h3>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-xl font-semibold mt-1">{formatNumber(stats.totalCompletions)}</p>
+                    <span class="text-xs text-accent-primary">+{stats.contributions.thisMonth} this month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-card-bg hover:bg-card-hover transition-colors duration-200 rounded-lg p-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-accent-primary/10 p-2 rounded-lg">
+                <svg class="w-5 h-5 text-accent-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-text-secondary">Current Streak</h3>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-xl font-semibold mt-1 flex items-center gap-2">
+                        {stats.streak.current} days
+                        <span class="text-amber-500">•</span>
+                    </p>
+                    <span class="text-xs text-text-secondary">Record: {stats.streak.record}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-card-bg hover:bg-card-hover transition-colors duration-200 rounded-lg p-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-accent-primary/10 p-2 rounded-lg">
+                <svg class="w-5 h-5 text-accent-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 14l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 14l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 21l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-text-secondary">Languages</h3>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-xl font-semibold mt-1">{stats.totalLanguages}</p>
+                    <span class="text-xs text-accent-primary">Most active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

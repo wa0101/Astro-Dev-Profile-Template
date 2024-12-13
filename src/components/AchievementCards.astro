@@ -1,0 +1,111 @@
+---
+interface Achievement {
+    id: string;
+    title: string;
+    level: string;
+    progress: number;
+    maxProgress: number;
+    isLocked: boolean;
+    icon: string;
+    color: string;
+    description: string;
+    achievedAt: string | null;
+}
+
+interface Props {
+    achievements?: Achievement[];
+}
+
+const { achievements = [
+    {
+        id: 'autocomplete-wizard-i',
+        title: 'Autocomplete Wizard I',
+        level: '0/10',
+        progress: 0,
+        maxProgress: 10,
+        isLocked: false,
+        icon: '< >',
+        color: 'bg-[#CCD1D5]',
+        description: 'Complete 10 autocomplete suggestions to unlock the next level',
+        achievedAt: null
+    },
+    {
+        id: 'autocomplete-wizard-ii',
+        title: 'Autocomplete Wizard II',
+        level: '-/20',
+        progress: 0,
+        maxProgress: 20,
+        isLocked: true,
+        icon: '< >',
+        color: 'bg-[#0969DA]',
+        description: 'Complete 20 autocomplete suggestions to unlock the next level',
+        achievedAt: null
+    },
+    {
+        id: 'autocomplete-wizard-iii',
+        title: 'Autocomplete Wizard III',
+        level: '-/30',
+        progress: 0,
+        maxProgress: 30,
+        isLocked: true,
+        icon: '< >',
+        color: 'bg-[#8250DF]',
+        description: 'Complete 30 autocomplete suggestions to unlock the next level',
+        achievedAt: null
+    },
+    {
+        id: 'autocomplete-wizard-iv',
+        title: 'Autocomplete Wizard IV',
+        level: '-/40',
+        progress: 0,
+        maxProgress: 40,
+        isLocked: true,
+        icon: '< >',
+        color: 'bg-[#CF222E]',
+        description: 'Complete 40 autocomplete suggestions to unlock the next level',
+        achievedAt: null
+    }
+] } = Astro.props;
+---
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    {achievements.map(achievement => (
+        <div 
+            class={`bg-card-bg hover:bg-card-hover transition-all duration-200 rounded-lg p-6 ${achievement.isLocked ? 'opacity-50' : ''}`}
+            title={achievement.description}
+        >
+            <div class={`flex items-center justify-center w-16 h-16 rounded-lg mb-4 ${achievement.color} bg-opacity-10`}>
+                <span class={`text-2xl font-mono ${achievement.color.replace('bg-', 'text-')}`}>
+                    {achievement.icon}
+                </span>
+            </div>
+            <div class="flex items-start justify-between mb-2">
+                <h3 class="text-lg font-semibold">{achievement.title}</h3>
+                {achievement.achievedAt && (
+                    <div class="bg-accent-primary/20 rounded-full p-1" title="Achievement Completed">
+                        <svg class="w-4 h-4 text-accent-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                )}
+            </div>
+            <p class="text-text-secondary mb-3 text-sm">Level {achievement.level}</p>
+            <div class="w-full bg-graph-empty rounded-full h-1.5 mb-2 overflow-hidden">
+                <div 
+                    class={`${achievement.color} h-1.5 rounded-full transition-all duration-300`}
+                    style={`width: ${(achievement.progress / achievement.maxProgress) * 100}%`}
+                ></div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+                <p class="text-text-secondary">
+                    {achievement.isLocked ? 'Locked' : `${achievement.progress}/${achievement.maxProgress} completed`}
+                </p>
+                {achievement.achievedAt && (
+                    <span class="text-accent-primary">
+                        Achieved
+                    </span>
+                )}
+            </div>
+        </div>
+    ))}
+</section>

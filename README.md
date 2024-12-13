@@ -1,48 +1,82 @@
-# Astro Starter Kit: Basics
+# WA Dev Profile
 
-```sh
-npm create astro@latest -- --template basics
+A modern, interactive developer profile page built with Astro and TypeScript. Features a sleek design with real-time status indicators, achievement tracking, and contribution history.
+
+## 🚀 Features
+
+- 💫 Modern, responsive design
+- 🎯 Achievement system with progress tracking
+- 📊 Interactive contribution graph
+- 🟢 Real-time status indicators
+- 👤 Customizable user profiles
+- 🎨 Beautiful UI with hover effects
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Static Site Generator
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [React](https://reactjs.org) - UI Components
+
+## 🏃‍♂️ Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/wa-dev-profile.git
+cd wa-dev-profile
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+2. Install dependencies:
+```bash
+npm install
+```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+3. Start the development server:
+```bash
+npm run dev
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 🚀 Project Structure
+## 📝 Configuration
 
-Inside of your Astro project, you'll see the following folders and files:
+Edit `src/config/profile.ts` to customize your profile:
 
-```text
+```typescript
+export const profileConfig = {
+  user: {
+    name: 'Your Name',
+    username: 'your-username',
+    bio: 'Your bio here',
+    // ... more options
+  },
+  // ... other configurations
+}
+```
+
+## 🎨 Customization
+
+- **Status Types**: Online, Idle, Offline, DoNotDisturb
+- **Achievement System**: Easily add new achievements
+- **Color Schemes**: Customizable through Tailwind classes
+
+## 📦 Project Structure
+
+```
 /
-├── public/
-│   └── favicon.svg
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/    # UI Components
+│   ├── config/       # Profile configuration
+│   ├── layouts/      # Page layouts
+│   └── pages/        # Route pages
+├── public/           # Static assets
+└── package.json      # Dependencies
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🤝 Contributing
 
-## 🧞 Commands
+Feel free to contribute! Open an issue or submit a pull request.
 
-All commands are run from the root of the project, from a terminal:
+## 📄 License
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT License - feel free to use this for your own profile!

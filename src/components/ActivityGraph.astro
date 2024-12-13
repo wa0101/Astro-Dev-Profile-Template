@@ -1,0 +1,101 @@
+---
+import { format } from 'date-fns';
+
+interface Props {
+    activityData: number[];
+}
+
+const { activityData } = Astro.props;
+
+const days = ['M', 'W', 'F'];
+
+// Calculate total contributions
+const totalContributions = activityData.reduce((sum, count) => sum + count, 0);
+
+// Generate dates for the last year
+const today = new Date();
+const dates = Array.from({ length: 371 }, (_, i) => {
+    const date = new Date(today);
+    date.setDate(date.getDate() - (371 - i));
+    return date;
+});
+
+// Get unique months for labels
+const months = Array.from(new Set(dates.map(date => format(date, 'MMM'))));
+
+// Format date for tooltip
+function formatDate(date: Date): string {
+    try {
+        return format(date, 'MMMM d, yyyy');
+    } catch {
+        return 'Invalid date';
+    }
+}
+---
+
+<section class="bg-card-bg hover:bg-card-hover transition-all duration-200 rounded-lg p-6 mb-8">
+    <div class="flex flex-col gap-6">
+        <!-- Contribution summary -->
+        <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold">Activity</h2>
+            <p class="text-sm text-text-secondary">
+                {totalContributions} contributions in the last year
+            </p>
+        </div>
+
+        <!-- Graph container -->
+        <div class="flex gap-2 overflow-x-auto pb-2">
+            <!-- Days labels -->
+            <div class="flex flex-col justify-between pt-2 text-[11px] text-text-secondary">
+                {days.map(day => <span>{day}</span>)}
+            </div>
+
+            <!-- Activity grid -->
+            <div class="flex-1 min-w-0">
+                <div class="flex gap-[3px]">
+                    {Array(53).fill(0).map((_, weekIndex) => (
+                        <div class="flex flex-col gap-[3px]">
+                            {Array(7).fill(0).map((_, dayIndex) => {
+                                const activityLevel = activityData[weekIndex * 7 + dayIndex] || 0;
+                                const date = dates[weekIndex * 7 + dayIndex];
+                                const dateStr = date ? formatDate(date) : 'No date';
+                                return (
+                                    <div 
+                                        class={`w-[10px] h-[10px] rounded-sm transition-colors duration-200 ${
+                                            activityLevel === 0 ? 'bg-graph-empty hover:bg-graph-l1' :
+                                            activityLevel === 1 ? 'bg-graph-l1' :
+                                            activityLevel === 2 ? 'bg-graph-l2' :
+                                            activityLevel === 3 ? 'bg-graph-l3' :
+                                            'bg-graph-l4'
+                                        }`}
+                                        title={`${activityLevel} contributions on ${dateStr}`}
+                                    />
+                                );
+                            })}
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Months labels -->
+                <div class="flex text-[11px] text-text-secondary mt-2">
+                    {months.map((month, index) => (
+                        <span class="flex-1 text-center">{month}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex items-center gap-2 text-xs text-text-secondary">
+            <span>Less</span>
+            <div class="flex gap-[3px]">
+                <div class="w-[10px] h-[10px] rounded-sm bg-graph-empty"></div>
+                <div class="w-[10px] h-[10px] rounded-sm bg-graph-l1"></div>
+                <div class="w-[10px] h-[10px] rounded-sm bg-graph-l2"></div>
+                <div class="w-[10px] h-[10px] rounded-sm bg-graph-l3"></div>
+                <div class="w-[10px] h-[10px] rounded-sm bg-graph-l4"></div>
+            </div>
+            <span>More</span>
+        </div>
+    </div>
+</section>

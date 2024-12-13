@@ -1,0 +1,74 @@
+---
+interface Props {
+    user: {
+        name: string;
+        username: string;
+        imgUrl: string;
+        publicProfile: string;
+        status: {
+            type: 'Online' | 'Idle' | 'Offline' | 'DoNotDisturb';
+            lastActive: string;
+        };
+        bio: string;
+    };
+}
+
+const { user } = Astro.props;
+
+const statusColors = {
+    Online: 'bg-green-500',
+    Idle: 'bg-yellow-500',
+    Offline: 'bg-gray-500',
+    DoNotDisturb: 'bg-red-500'
+};
+
+const statusTitle = {
+    Online: 'Online',
+    Idle: 'Away',
+    Offline: 'Offline',
+    DoNotDisturb: 'Do Not Disturb'
+};
+---
+
+<header class="flex flex-col md:flex-row items-start gap-6 bg-card-bg hover:bg-card-hover transition-all duration-200 rounded-lg p-6 mb-8">
+    <div class="relative">
+        <img 
+            src={user.imgUrl} 
+            alt={`${user.name}'s profile picture`}
+            class="w-32 h-32 rounded-full border-4 border-card-border"
+        />
+        <div 
+            class={`absolute bottom-1 right-1 w-5 h-5 rounded-full border-4 border-card-bg ${statusColors[user.status.type]}`}
+            title={statusTitle[user.status.type]}
+        />
+    </div>
+    
+    <div class="flex-1">
+        <div class="flex items-center gap-4 mb-2">
+            <h1 class="text-2xl font-bold">{user.name}</h1>
+            <a 
+                href={user.publicProfile}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent-primary hover:text-accent-primary/80 transition-colors"
+            >
+                <span class="sr-only">View public profile</span>
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+        
+        <p class="text-text-secondary mb-4">@{user.username}</p>
+        
+        <p class="text-text-primary mb-4">{user.bio}</p>
+        
+        <div class="flex items-center text-sm text-text-secondary">
+            <span class={`inline-block w-2 h-2 rounded-full mr-2 ${statusColors[user.status.type]}`}></span>
+            {user.status.type === 'Online' 
+                ? 'Currently Online'
+                : `Last active ${user.status.lastActive}`
+            }
+        </div>
+    </div>
+</header>
