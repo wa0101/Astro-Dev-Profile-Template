@@ -35,8 +35,8 @@ Still needs work on:
 
 1. Clone it:
 ```bash
-git clone https://github.com/yourusername/dev-profile-template.git
-cd dev-profile-template
+git clone https://github.com/wa0101/Astro-Dev-Profile-Template
+cd Astro-Dev-Profile-Template
 ```
 
 2. Install dependencies:
